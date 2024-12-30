@@ -3,7 +3,7 @@ import Foundation
 import ProjectDescription
 import DependencyPlugin
 import EnvironmentPlugin
-import ConfigurationPlugin
+//import ConfigurationPlugin
 
 let isCI = (ProcessInfo.processInfo.environment["TUIST_CI"] ?? "0") == "1" ? true : false
 
