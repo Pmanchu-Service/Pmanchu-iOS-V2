@@ -1,8 +1,11 @@
-//
-//  d.swift
-//  Presentation
-//
-//  Created by 이지훈 on 1/1/25.
-//  Copyright © 2025 com.team.mandoo. All rights reserved.
-//
+import UIKit
 
+import RxSwift
+import RxCocoa
+
+import Core
+import DesignSystem
+
+open class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
+    
+}
