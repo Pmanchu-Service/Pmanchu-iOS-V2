@@ -1,6 +1,15 @@
 import UIKit
 
+import SnapKit
+import Then
 
-public class LoginViewController: BaseViewController {
+import RxSwift
+import RxCocoa
+
+import Core
+import DesignSystem
+
+public class LoginViewController: BaseViewController<LoginViewModel> {
+    
     
 }
