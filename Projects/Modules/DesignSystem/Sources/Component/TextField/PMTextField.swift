@@ -15,14 +15,14 @@ public final class PMTextField: BaseTextField {
             $0.layer.cornerRadius = 8
             $0.layer.borderColor = UIColor.gray2.cgColor
             $0.layer.borderWidth = 1.0
-            $0.font = UIFont.systemFont(ofSize: 16)
+            $0.font = UIFont.systemFont(ofSize: 14)
             $0.textColor = .gray5
-//            $0.textAlignment = .left
+            $0.textAlignment = .left
             $0.attributedPlaceholder = NSAttributedString(
                 string: "이름(본명)을 입력하세요",
                 attributes: [
-                    .foregroundColor: UIColor.lightGray,
-                    .font: UIFont.systemFont(ofSize: 16)
+                    .foregroundColor: UIColor.gray5,
+                    .font: UIFont.systemFont(ofSize: 14)
                 ]
             )
         }
