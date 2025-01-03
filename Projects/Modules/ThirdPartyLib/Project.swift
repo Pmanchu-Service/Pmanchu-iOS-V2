@@ -7,5 +7,15 @@ let project = Project.makeModule(
     platform: .iOS,
     product: .staticFramework,
     packages: [],
-    dependencies: []
+    dependencies: [
+        .SPM.KeychainSwift,
+        .SPM.Moya,
+        .SPM.RxCocoa,
+        .SPM.RxFlow,
+        .SPM.RxMoya,
+        .SPM.RxSwift,
+        .SPM.Swinject,
+        .SPM.Then,
+        .SPM.SnapKit
+    ]
 )
