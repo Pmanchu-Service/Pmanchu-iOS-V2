@@ -7,12 +7,15 @@ import RxFlow
 import Core
 import Domain
 
-
-
 public class NameViewModel: BaseViewModel {
-    public typealias Input = <#type#>
-    
-    public typealias Output = <#type#>
-    
-    
+    public struct Input {}
+
+    public struct Output {}
+
+    public func transform(input: Input) -> Output {
+        return Output()
+    }
+
+    public init() {}
 }
+
