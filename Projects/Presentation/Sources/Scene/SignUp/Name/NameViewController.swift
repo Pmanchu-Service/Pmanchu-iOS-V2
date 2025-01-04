@@ -11,13 +11,20 @@ import DesignSystem
 
 public class NameViewController: BaseViewController<NameViewModel> {
     private let idTextField = PMTextField()
+    private let loginButton = PMButton(
+        buttonText: "다음",
+        isHidden: false
+    )
 
     public override func attribute() {
         super.attribute()
         view.backgroundColor = .systemBackground
     }
     public override func addView() {
-        view.addSubview(idTextField)
+        [
+            idTextField,
+            loginButton
+        ].forEach { view.addSubview($0) }
     }
 
     override public func viewDidLoad() {
@@ -33,6 +40,12 @@ public class NameViewController: BaseViewController<NameViewModel> {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.width.equalTo(345)
             $0.height.equalTo(40)
+        }
+        loginButton.snp.makeConstraints {
+            $0.top.equalTo(733)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.width.equalTo(345)
+            $0.height.equalTo(60)
         }
     }
 }
