@@ -54,6 +54,6 @@ public class PMButton: BaseButton {
         self.backgroundColor = bgColor
         self.setTitleColor(.system2, for: .normal)
         self.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        self.layer.cornerRadius = 8
+        self.layer.cornerRadius = 10
     }
 }
