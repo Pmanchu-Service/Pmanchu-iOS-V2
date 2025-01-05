@@ -10,8 +10,8 @@ import Core
 import DesignSystem
 
 public class NameViewController: BaseViewController<NameViewModel> {
-    private let idTextField = PMTextField()
-    private let loginButton = PMButton(
+    private let nameTextField = PMTextField()
+    private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false
     )
@@ -22,8 +22,8 @@ public class NameViewController: BaseViewController<NameViewModel> {
     }
     public override func addView() {
         [
-            idTextField,
-            loginButton
+            nameTextField,
+            nextButton
         ].forEach { view.addSubview($0) }
     }
 
@@ -35,17 +35,16 @@ public class NameViewController: BaseViewController<NameViewModel> {
     }
 
     public override func setLayout() {
-        idTextField.snp.makeConstraints {
+        nameTextField.snp.makeConstraints {
             $0.top.equalTo(373)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.width.equalTo(345)
             $0.height.equalTo(40)
         }
-        loginButton.snp.makeConstraints {
-            $0.top.equalTo(733)
+        nextButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.width.equalTo(345)
-            $0.height.equalTo(60)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(25)
         }
     }
 }
