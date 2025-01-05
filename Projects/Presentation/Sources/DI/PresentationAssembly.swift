@@ -5,7 +5,6 @@ import Domain
 
 public final class PresentationAssembly: Assembly {
     public init() {}
-    
     public func assemble(container: Container) {
 
         container.register(NameViewModel.self) { _ in
@@ -19,7 +18,7 @@ public final class PresentationAssembly: Assembly {
         container.register(NameViewController.self) { resolver in
             NameViewController(viewModel: resolver.resolve(NameViewModel.self)!)
         }
-        
+
         container.register(RankViewController.self) { resolver in
             RankViewController(viewModel: resolver.resolve(RankViewModel.self)!)
         }

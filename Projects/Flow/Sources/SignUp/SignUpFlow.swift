@@ -16,16 +16,19 @@ public class SignUpFlow: Flow {
        self.container = container
    }
 
-   public func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
-       guard let step = step as? PMStep else { return .none }
+    public func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
+        guard let step = step as? PMStep else { return .none }
 
-       switch step {
-       case .signUpIsRequired:
-           return navigateToSignUp()
-       case .rankIsRequired:
-           return navigateToRank()
-       }
-   }
+        switch step {
+        case .signUpIsRequired:
+            return navigateToSignUp()
+        case .rankIsRequired:
+            if !rootViewController.viewControllers.contains(where: { $0 is RankViewController }) {
+                return navigateToRank()
+            }
+            return .none
+        }
+    }
 
    private func navigateToSignUp() -> FlowContributors {
        let signUpVC = container.resolve(NameViewController.self)!
