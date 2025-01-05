@@ -13,7 +13,6 @@ public class RankViewController: BaseViewController<RankViewModel> {
     private let rankTextField = PMTextField()
     public override func attribute() {
         super.attribute()
-        view.backgroundColor = .systemBackground
     }
     public override func bind() {
         

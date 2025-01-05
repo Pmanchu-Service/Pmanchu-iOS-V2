@@ -7,7 +7,7 @@ import Domain
 
 public class NameViewModel: BaseViewModel, Stepper {
     public var steps = PublishRelay<Step>()
-    private let disposeBag = DisposeBag()
+
     public struct Input {
         let nameText: Observable<String>
         let clickNextButton: Observable<Void>
@@ -23,16 +23,14 @@ public class NameViewModel: BaseViewModel, Stepper {
             .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .asDriver(onErrorJustReturn: false)
 
-        input.clickNextButton
-            .map { PMStep.rankIsRequired }
-            .bind(to: steps)
-            .disposed(by: disposeBag)
-
         let nextStep = input.clickNextButton
             .map { PMStep.rankIsRequired }
-            .asDriver(onErrorJustReturn: PMStep.rankIsRequired)
+            .asDriver(onErrorDriveWith: .empty())
 
-        return Output(isNextButtonEnabled: isNextButtonEnabled, nextStep: nextStep)
+        return Output(
+            isNextButtonEnabled: isNextButtonEnabled,
+            nextStep: nextStep
+        )
     }
 
     public init() {}
