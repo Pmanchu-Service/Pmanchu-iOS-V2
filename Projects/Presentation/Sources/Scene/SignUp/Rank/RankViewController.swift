@@ -18,7 +18,6 @@ public class RankViewController: BaseViewController<RankViewModel> {
     public override func bind() {
         
     }
-
     public override func addView() {
         [
             label,

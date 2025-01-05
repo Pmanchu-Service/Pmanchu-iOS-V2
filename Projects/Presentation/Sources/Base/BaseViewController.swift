@@ -22,6 +22,7 @@ open class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
         attribute()
         bind()
         configureNavigationBar()
+        self.navigationItem.hidesBackButton = true
     }
 
     open func attribute() {
