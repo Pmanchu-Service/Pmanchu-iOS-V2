@@ -33,9 +33,10 @@ public class NameViewController: BaseViewController<NameViewModel> {
             .drive(nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
 
-        input.clickNextButton
-            .map { PMStep.rankIsRequired }
-            .bind(to: viewModel.steps)
+        output.nextStep
+            .drive(onNext: { [weak self] step in
+                self?.viewModel.steps.accept(step)
+            })
             .disposed(by: disposeBag)
     }
 
