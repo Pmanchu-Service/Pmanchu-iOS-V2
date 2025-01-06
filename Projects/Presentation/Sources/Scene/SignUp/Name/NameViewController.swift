@@ -25,19 +25,10 @@ public class NameViewController: BaseViewController<NameViewModel> {
     public override func bind() {
         let input = NameViewModel.Input(
             nameText: nameTextField.rx.text.orEmpty.asObservable(),
-            clickNextButton: nextButton.buttonTap.asObservable()
+            clickNextButton: nextButton.buttonTap.asObservable(),
+            nextButton: nextButton
         )
-        let output = viewModel.transform(input: input)
-
-        output.isNextButtonEnabled
-            .drive(nextButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-
-        output.nextStep
-            .drive(onNext: { [weak self] step in
-                self?.viewModel.steps.accept(step)
-            })
-            .disposed(by: disposeBag)
+        _ = viewModel.transform(input: input)
     }
 
     public override func addView() {

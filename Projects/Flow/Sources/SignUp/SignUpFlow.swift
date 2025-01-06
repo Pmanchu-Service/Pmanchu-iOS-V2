@@ -4,49 +4,56 @@ import Swinject
 import Core
 import Presentation
 
-public class SignUpFlow: Flow {
-   public let container: Container
-   private var rootViewController = UINavigationController()
-
-   public var root: Presentable {
-       return rootViewController
-   }
-
-   public init(container: Container) {
-       self.container = container
-   }
-
-    public func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
+public final class SignUpFlow: Flow {
+    private let container: Container
+    
+    public var root: Presentable {
+        return self.rootViewController
+    }
+    
+    private let rootViewController: UINavigationController
+    
+    public init(container: Container) {
+        self.container = container
+        self.rootViewController = UINavigationController()
+    }
+    
+    public func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? PMStep else { return .none }
-
+        
         switch step {
         case .signUpIsRequired:
-            return navigateToSignUp()
+            return navigateToName()
+            
         case .rankIsRequired:
-            if !rootViewController.viewControllers.contains(where: { $0 is RankViewController }) {
-                return navigateToRank()
-            }
-            return .none
+            return navigateToRank()
+            
         default:
             return .none
         }
     }
-
-   private func navigateToSignUp() -> FlowContributors {
-       let signUpVC = container.resolve(NameViewController.self)!
-       rootViewController.pushViewController(signUpVC, animated: true)
-       return .one(flowContributor: .contribute(
-           withNextPresentable: signUpVC,
-           withNextStepper: signUpVC.viewModel
-       ))
-   }
-
-   private func navigateToRank() -> FlowContributors {
-       let rankVC = container.resolve(RankViewController.self)!
-       rootViewController.pushViewController(rankVC, animated: true)
-       return .one(flowContributor: .contribute(
-           withNextPresentable: rankVC,
-           withNextStepper: rankVC.viewModel
-       ))
-   }
+    
+    private func navigateToName() -> FlowContributors {
+        let viewController = container.resolve(NameViewController.self)!
+        rootViewController.pushViewController(viewController, animated: true)
+        
+        return .one(
+            flowContributor: .contribute(
+                withNextPresentable: viewController,
+                withNextStepper: viewController.viewModel
+            )
+        )
+    }
+    
+    private func navigateToRank() -> FlowContributors {
+        let viewController = container.resolve(RankViewController.self)!
+        rootViewController.pushViewController(viewController, animated: true)
+        
+        return .one(
+            flowContributor: .contribute(
+                withNextPresentable: viewController,
+                withNextStepper: viewController.viewModel
+            )
+        )
+    }
 }
