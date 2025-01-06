@@ -27,6 +27,8 @@ public class SignUpFlow: Flow {
                 return navigateToRank()
             }
             return .none
+        default:
+            return .none
         }
     }
 
