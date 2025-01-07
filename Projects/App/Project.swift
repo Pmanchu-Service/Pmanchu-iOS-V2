@@ -3,12 +3,19 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 import EnvironmentPlugin
 import DependencyPlugin
-//import ConfigurationPlugin
+import ConfigurationPlugin
 
 let isCI: Bool = (ProcessInfo.processInfo.environment["TUIST_CI"] ?? "0") == "1"
 
+
+let configurations: [Configuration] = [
+    .debug(name: .debug, xcconfig: .relativeToXCConfig()),
+    .release(name: .release, xcconfig: .relativeToXCConfig())
+]
+
 let settings: Settings = .settings(
     base: env.baseSetting,
+    configurations: configurations,
     defaultSettings: .recommended
 )
 
