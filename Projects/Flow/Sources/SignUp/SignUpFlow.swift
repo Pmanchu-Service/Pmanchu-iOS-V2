@@ -6,16 +6,14 @@ import Presentation
 
 public final class SignUpFlow: Flow {
     private let container: Container
+    private let rootViewController = UINavigationController()
     
     public var root: Presentable {
-        return self.rootViewController
+        return rootViewController
     }
-    
-    private let rootViewController: UINavigationController
     
     public init(container: Container) {
         self.container = container
-        self.rootViewController = UINavigationController()
     }
     
     public func navigate(to step: Step) -> FlowContributors {
@@ -24,36 +22,28 @@ public final class SignUpFlow: Flow {
         switch step {
         case .signUpIsRequired:
             return navigateToName()
-            
         case .rankIsRequired:
             return navigateToRank()
-            
         default:
             return .none
         }
     }
     
     private func navigateToName() -> FlowContributors {
-        let viewController = container.resolve(NameViewController.self)!
-        rootViewController.pushViewController(viewController, animated: true)
-        
-        return .one(
-            flowContributor: .contribute(
-                withNextPresentable: viewController,
-                withNextStepper: viewController.viewModel
-            )
-        )
+        let vc = container.resolve(NameViewController.self)!
+        rootViewController.pushViewController(vc, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: vc,
+            withNextStepper: vc.viewModel
+        ))
     }
     
     private func navigateToRank() -> FlowContributors {
-        let viewController = container.resolve(RankViewController.self)!
-        rootViewController.pushViewController(viewController, animated: true)
-        
-        return .one(
-            flowContributor: .contribute(
-                withNextPresentable: viewController,
-                withNextStepper: viewController.viewModel
-            )
-        )
+        let vc = container.resolve(RankViewController.self)!
+        rootViewController.pushViewController(vc, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: vc,
+            withNextStepper: vc.viewModel
+        ))
     }
 }
