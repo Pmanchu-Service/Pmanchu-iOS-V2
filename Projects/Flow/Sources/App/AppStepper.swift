@@ -9,6 +9,6 @@ public final class AppStepper: Stepper {
     public init() {}
 
     public var initialStep: Step {
-        return PMStep.loginIsRequired
+        return PMStep.signUpIsRequired
     }
 }

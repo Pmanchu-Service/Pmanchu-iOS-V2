@@ -6,21 +6,23 @@ import Domain
 public final class PresentationAssembly: Assembly {
     public init() {}
     public func assemble(container: Container) {
-
-        container.register(LoginViewModel.self) { _ in
+        // Login
+        container.register(LoginViewModel.self) { resolver in
             LoginViewModel()
         }
         container.register(LoginViewController.self) { resolver in
             LoginViewController(viewModel: resolver.resolve(LoginViewModel.self)!)
         }
 
-        container.register(NameViewModel.self) { _ in
-            NameViewModel()
+        // SignUp - Name
+        container.register(NameViewModel.self) { resolver in
+            NameViewModel(signUpUseCase: resolver.resolve(SignUpUseCase.self)!)
         }
         container.register(NameViewController.self) { resolver in
             NameViewController(viewModel: resolver.resolve(NameViewModel.self)!)
         }
 
+        // SignUp - Rank
         container.register(RankViewModel.self) { _ in
             RankViewModel()
         }

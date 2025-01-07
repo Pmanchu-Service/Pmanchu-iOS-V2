@@ -11,24 +11,40 @@ public class RankViewController: BaseViewController<RankViewModel> {
         explainText: "기수를 입력하세요"
     )
     private let rankTextField = PMTextField()
+    private let nextButton = PMButton(
+        buttonText: "다음",
+        isHidden: false
+    )
+
     public override func attribute() {
         super.attribute()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     public override func bind() {
+        let input = RankViewModel.Input(
+            rankText: rankTextField.rx.text.orEmpty.asObservable(),
+            nextButtonTap: nextButton.buttonTap.asObservable()
+        )
+        let output = viewModel.transform(input: input)
+
         
+        output.isNextButtonEnabled
+            .drive(nextButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.nextStep
+            .drive(onNext: { [weak self] step in
+                self?.viewModel.steps.accept(step)
+            })
+            .disposed(by: disposeBag)
     }
+
     public override func addView() {
         [
             label,
-            rankTextField
+            rankTextField,
+            nextButton
         ].forEach { view.addSubview($0) }
-    }
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-        attribute()
-        addView()
-        setLayout()
     }
 
     public override func setLayout() {
@@ -42,6 +58,10 @@ public class RankViewController: BaseViewController<RankViewModel> {
             $0.top.equalTo(label.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(40)
+        }
+        nextButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(25)
         }
     }
 }

@@ -3,7 +3,7 @@ import Foundation
 import ProjectDescription
 import DependencyPlugin
 import EnvironmentPlugin
-//import ConfigurationPlugin
+import ConfigurationPlugin
 
 let isCI = (ProcessInfo.processInfo.environment["TUIST_CI"] ?? "0") == "1" ? true : false
 
@@ -22,6 +22,15 @@ extension Project {
         configurations: [Configuration] = [],
         additionalPlistRows: [String: ProjectDescription.InfoPlist.Value] = [:]
     ) -> Project {
+        
+        
+        var configurations = configurations
+                if configurations.isEmpty {
+                    configurations = [
+                        .debug(name: .debug, xcconfig: .relativeToXCConfig()),
+                        .release(name: .release, xcconfig: .relativeToXCConfig())
+                      ]
+                }
 
         let scripts: [TargetScript] = isCI ? [] : [.swiftLint]
 
@@ -34,6 +43,7 @@ extension Project {
                 .merging(.codeSign)
                 .merging(settings)
                 .merging(ldFlagsSettings),
+            configurations: configurations,
             defaultSettings: .recommended
         )
 
