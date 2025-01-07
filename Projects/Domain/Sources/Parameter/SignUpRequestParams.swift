@@ -2,30 +2,42 @@ import Foundation
 
 public struct SignUpRequestParams: Encodable {
     public let name: String
-    public let rank: String
+    public let majors: [String]
+    public let years: Int
     public let introduction: String
-    public let techStack: [String]
-    public let major: String
- 
+    public let shortIntroduction: String
+    public let contact: String
+    public let links: [String]
+    public let stacks: [String]
+
     public init(
         name: String,
-        rank: String,
+        majors: [String],
+        years: Int,
         introduction: String,
-        techStack: [String],
-        major: String
+        shortIntroduction: String,
+        contact: String,
+        links: [String],
+        stacks: [String]
     ) {
         self.name = name
-        self.rank = rank
+        self.majors = majors
+        self.years = years
         self.introduction = introduction
-        self.techStack = techStack
-        self.major = major
+        self.shortIntroduction = shortIntroduction
+        self.contact = contact
+        self.links = links
+        self.stacks = stacks
     }
-
+    
     enum CodingKeys: String, CodingKey {
         case name
-        case rank
+        case majors
+        case years
         case introduction
-        case techStack = "tech_stack"
-        case major
+        case shortIntroduction = "shortIntroduction"
+        case contact
+        case links
+        case stacks
     }
 }
