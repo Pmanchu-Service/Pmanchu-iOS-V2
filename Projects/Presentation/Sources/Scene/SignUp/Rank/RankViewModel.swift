@@ -17,7 +17,7 @@ public class RankViewModel: BaseViewModel, Stepper {
     }
 
     private let disposeBag = DisposeBag()
-    public var steps = PublishRelay<Step>(
+    public var steps = PublishRelay<Step>()
     private let savedRankText = BehaviorRelay<String?>(value: nil)
     public func transform(input: Input) -> Output {
         
