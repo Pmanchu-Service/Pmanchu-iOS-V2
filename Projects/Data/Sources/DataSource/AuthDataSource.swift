@@ -10,7 +10,7 @@ import AppNetwork
 
 protocol AuthDataSource {
     func signUp(req: SignUpRequestParams) -> Single<TokenDTO>
-    func logout()
+//    func logout()
     func refreshToken() -> Single<TokenDTO>
 }
 
@@ -29,12 +29,10 @@ class AuthDataSourceImpl: BaseDataSource<AuthAPI>, AuthDataSource {
             .map(TokenDTO.self)
     }
 
-    func logout() {
-        keychain.delete(type: .accessToken)
-        keychain.delete(type: .refreshToken)
-        keychain.delete(type: .id)
-        keychain.delete(type: .password)
-    }
+//    func logout() {
+//        keychain.delete(type: .accessToken)
+//        keychain.delete(type: .refreshToken)
+//    }
 
     func refreshToken() -> Single<TokenDTO> {
         return request(.refreshToken)

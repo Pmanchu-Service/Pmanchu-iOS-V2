@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         assembler = Assembler([
+            DataSourceAssembly(),
+            RepositoryAssembly(),
+            UseCaseAssembly(),
             PresentationAssembly()
          ], container: AppDelegate.container)
 

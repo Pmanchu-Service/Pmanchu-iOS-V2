@@ -9,10 +9,11 @@ import DesignSystem
 public class NameViewModel: BaseViewModel, Stepper {
     private let disposeBag = DisposeBag()
     public var steps = PublishRelay<Step>()
+    private let keychain = KeychainImpl()
     private let signUpUseCase: SignUpUseCase
-    
+
     private let nameErrorDescription = PublishRelay<String?>()
-    
+
     public init(signUpUseCase: SignUpUseCase) {
         self.signUpUseCase = signUpUseCase
     }
@@ -29,14 +30,14 @@ public class NameViewModel: BaseViewModel, Stepper {
 
     public func transform(input: Input) -> Output {
         let nameText = input.nameText.share()
-        
+
         nameText
             .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .subscribe(onNext: { isEnabled in
                 input.nextButton.isEnabled = isEnabled
             })
             .disposed(by: disposeBag)
-        
+
         input.clickNextButton
             .withLatestFrom(nameText)
             .filter { [weak self] name in
@@ -45,15 +46,18 @@ public class NameViewModel: BaseViewModel, Stepper {
             }
             .flatMap { [weak self] name -> Single<Step> in
                 guard let self = self else { return .never() }
-                
+
                 let signUpRequest = SignUpRequestParams(
                     name: name.trimmingCharacters(in: .whitespacesAndNewlines),
-                    rank: "",
+                    majors: [""],
+                    rank: 0,
                     introduction: "",
-                    techStack: [],
-                    major: ""
+                    shortIntroduction: "",
+                    contact: "",
+                    links: [""],
+                    stacks: [""]
                 )
-                
+
                 return self.signUpUseCase.execute(req: signUpRequest)
                     .catch { [weak self] error in
                         print("SignUp Error: \(error.localizedDescription)")
@@ -74,7 +78,7 @@ public class NameViewModel: BaseViewModel, Stepper {
 extension NameViewModel {
     private func checkNameData(_ name: String) -> Bool {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         if trimmedName.isEmpty {
             nameErrorDescription.accept("이름을 입력해주세요")
             return false

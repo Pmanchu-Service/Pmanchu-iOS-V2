@@ -1,6 +1,7 @@
 import Foundation
 import Swinject
 import Core
+import Data
 import Domain
 
 public final class PresentationAssembly: Assembly {
@@ -15,11 +16,11 @@ public final class PresentationAssembly: Assembly {
         }
 
         // SignUp - Name
-        container.register(NameViewModel.self) { resolver in
-            NameViewModel(signUpUseCase: resolver.resolve(SignUpUseCase.self)!)
-        }
         container.register(NameViewController.self) { resolver in
             NameViewController(viewModel: resolver.resolve(NameViewModel.self)!)
+        }
+        container.register(NameViewModel.self) { resolver in
+            NameViewModel(signUpUseCase: resolver.resolve(SignUpUseCase.self)!)
         }
 
         // SignUp - Rank
