@@ -26,12 +26,9 @@ public class RankViewController: BaseViewController<RankViewModel> {
             nextButtonTap: nextButton.buttonTap.asObservable()
         )
         let output = viewModel.transform(input: input)
-
-        
         output.isNextButtonEnabled
             .drive(nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
-        
         output.nextStep
             .drive(onNext: { [weak self] step in
                 self?.viewModel.steps.accept(step)
