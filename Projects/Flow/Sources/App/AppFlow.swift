@@ -22,25 +22,25 @@ public class AppFlow: Flow {
         }
 
         switch step {
-        case .signUpIsRequired:
-            return navigationToSignUp()
+        case .start:
+            return navigationToLogin()
         default:
             return .none
         }
     }
 
-    private func navigationToSignUp() -> FlowContributors {
-        let signUpFlow = SignUpFlow(container: self.container)
+    private func navigationToLogin() -> FlowContributors {
+        let loginFlow = LoginFlow(container: self.container)
 
-        Flows.use(signUpFlow, when: .created) { [weak self] root in
+        Flows.use(loginFlow, when: .created) { [weak self] root in
             self?.window.rootViewController = root
         }
 
         return .one(
             flowContributor: .contribute(
-                withNextPresentable: signUpFlow,
+                withNextPresentable: loginFlow,
                 withNextStepper: OneStepper(
-                    withSingleStep: PMStep.signUpIsRequired
+                    withSingleStep: PMStep.loginIsRequired
                 )
             )
         )

@@ -1,7 +1,9 @@
 import RxFlow
 
 public enum PMStep: Step {
-    case signUpIsRequired
-    case rankIsRequired
+    case start
     case loginIsRequired
+    case nameIsRequired
+    case rankIsRequired
+    case toRankIsRequired
 }
