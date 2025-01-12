@@ -20,7 +20,6 @@ public class RankViewModel: BaseViewModel, Stepper {
     public var steps = PublishRelay<Step>()
     private let savedRankText = BehaviorRelay<String?>(value: nil)
     public func transform(input: Input) -> Output {
-        
         let isNextButtonEnabled = input.rankText
             .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .asDriver(onErrorJustReturn: false)
@@ -31,7 +30,7 @@ public class RankViewModel: BaseViewModel, Stepper {
                 self?.savedRankText.accept(rank)
             })
             .disposed(by: disposeBag)
-        
+
         let nextStep = input.nextButtonTap
             .map { PMStep.rankIsRequired }
             .asDriver(onErrorJustReturn: PMStep.rankIsRequired)

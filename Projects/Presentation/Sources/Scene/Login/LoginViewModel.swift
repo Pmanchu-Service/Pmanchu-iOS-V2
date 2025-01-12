@@ -19,7 +19,7 @@ public class LoginViewModel: BaseViewModel, Stepper {
 
     public func transform(input: Input) -> Output {
         input.clickGithuhButton
-            .map { PMStep.signUpIsRequired }
+            .map { PMStep.start }
             .bind(to: steps)
             .disposed(by: disposeBag)
         return Output()
