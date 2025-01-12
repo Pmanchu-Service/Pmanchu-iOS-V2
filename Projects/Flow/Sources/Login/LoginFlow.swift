@@ -24,7 +24,9 @@ public class LoginFlow: Flow {
         switch step {
         case .loginIsRequired:
             return navigateToLogin()
-        case .signUpIsRequired:
+        case .nameIsRequired:
+            return navigateToName()
+        case .start:
             return navigateToSignup()
         default:
             return .none
@@ -39,6 +41,16 @@ public class LoginFlow: Flow {
             withNextStepper: loginVC.viewModel
         ))
     }
+
+    private func navigateToName() -> FlowContributors {
+        let nameVC = container.resolve(NameViewController.self)!
+        self.rootViewController.pushViewController(nameVC, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: nameVC,
+            withNextStepper: nameVC.viewModel
+        ))
+    }
+
     private func navigateToSignup() -> FlowContributors {
         let signupVC = container.resolve(NameViewController.self)!
         self.rootViewController.pushViewController(signupVC, animated: true)
