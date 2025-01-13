@@ -26,11 +26,22 @@ public class LoginFlow: Flow {
             return navigateToLogin()
         case .nameIsRequired:
             return navigateToName()
+        case .rankIsRequired:
+            return navigateToRank()
         case .start:
             return navigateToSignup()
         default:
             return .none
         }
+    }
+
+    private func navigateToRank() -> FlowContributors {
+        let rankVC = container.resolve(RankViewController.self)!
+        self.rootViewController.pushViewController(rankVC, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: rankVC,
+            withNextStepper: rankVC.viewModel
+        ))
     }
 
     private func navigateToLogin() -> FlowContributors {
