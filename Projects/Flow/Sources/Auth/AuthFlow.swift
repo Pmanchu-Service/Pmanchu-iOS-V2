@@ -36,9 +36,6 @@ public class LoginFlow: Flow {
             return .none
         }
     }
-    
-    
-    
     private func navigateToEmail() -> FlowContributors {
         let emailViewController = container.resolve(EmailViewController.self)!
         self.rootViewController.pushViewController(emailViewController, animated: true)
@@ -47,9 +44,6 @@ public class LoginFlow: Flow {
             withNextStepper: emailViewController.viewModel
         ))
     }
-    
-    
-
     private func navigateToRank() -> FlowContributors {
         let rankVC = container.resolve(RankViewController.self)!
         self.rootViewController.pushViewController(rankVC, animated: true)
