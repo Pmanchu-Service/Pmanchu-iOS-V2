@@ -30,7 +30,7 @@ public class NameViewController: BaseViewController<NameViewModel> {
         )
         _ = viewModel.transform(input: input)
     }
-    
+
     public override func addView() {
         [
             label,
