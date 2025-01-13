@@ -30,10 +30,25 @@ public class LoginFlow: Flow {
             return navigateToRank()
         case .start:
             return navigateToSignup()
+        case .emailIsRequired:
+            return navigateToEmail()
         default:
             return .none
         }
     }
+    
+    
+    
+    private func navigateToEmail() -> FlowContributors {
+        let emailViewController = container.resolve(EmailViewController.self)!
+        self.rootViewController.pushViewController(emailViewController, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: emailViewController,
+            withNextStepper: emailViewController.viewModel
+        ))
+    }
+    
+    
 
     private func navigateToRank() -> FlowContributors {
         let rankVC = container.resolve(RankViewController.self)!
