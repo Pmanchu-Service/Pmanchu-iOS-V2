@@ -32,9 +32,8 @@ public class RankViewModel: BaseViewModel, Stepper {
             .disposed(by: disposeBag)
 
         let nextStep = input.nextButtonTap
-            .map { PMStep.rankIsRequired }
-            .asDriver(onErrorJustReturn: PMStep.rankIsRequired)
-
+            .map { PMStep.emailIsRequired }
+            .asDriver(onErrorJustReturn: PMStep.emailIsRequired)
         return Output(
             isNextButtonEnabled: isNextButtonEnabled,
             nextStep: nextStep
