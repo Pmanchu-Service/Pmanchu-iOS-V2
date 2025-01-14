@@ -25,14 +25,14 @@ public class NameViewModel: BaseViewModel, Stepper {
     }
     public func transform(input: Input) -> Output {
         let nameText = input.nameText.share()
-        
+
         nameText
             .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .subscribe(onNext: { isEnabled in
                 input.nextButton.isEnabled = isEnabled
             })
             .disposed(by: disposeBag)
-        
+
         input.clickNextButton
             .withLatestFrom(nameText)
             .filter { [weak self] name in

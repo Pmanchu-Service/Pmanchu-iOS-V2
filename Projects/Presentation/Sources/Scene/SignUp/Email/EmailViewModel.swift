@@ -27,7 +27,7 @@ public class EmailViewModel: BaseViewModel, Stepper {
             .withLatestFrom(emailText)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.steps.accept(PMStep.nameIsRequired)
+                self.steps.accept(PMStep.selfIsRequired)
             })
             .disposed(by: disposeBag)
 
