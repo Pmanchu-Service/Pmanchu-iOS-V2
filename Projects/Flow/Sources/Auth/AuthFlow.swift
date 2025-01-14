@@ -32,9 +32,32 @@ public class LoginFlow: Flow {
             return navigateToSignup()
         case .emailIsRequired:
             return navigateToEmail()
+        case .selfIsRequired:
+            return navigateToSelf()
+        case .skillIsRequired:
+            return navigateToSkill()
         default:
             return .none
         }
+    }
+    private func navigateToSkill() -> FlowContributors {
+        let skillViewController = container.resolve(SkillViewController.self)!
+        self.rootViewController.pushViewController(skillViewController, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: skillViewController,
+            withNextStepper: skillViewController.viewModel
+        ))
+    }
+    
+    
+    
+    private func navigateToSelf() -> FlowContributors {
+        let selfViewController = container.resolve(SelfViewController.self)!
+        self.rootViewController.pushViewController(selfViewController, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: selfViewController,
+            withNextStepper: selfViewController.viewModel
+        ))
     }
     private func navigateToEmail() -> FlowContributors {
         let emailViewController = container.resolve(EmailViewController.self)!

@@ -7,4 +7,6 @@ public enum PMStep: Step {
     case rankIsRequired
     case toRankIsRequired
     case emailIsRequired
+    case selfIsRequired
+    case skillIsRequired
 }
