@@ -39,5 +39,12 @@ public final class PresentationAssembly: Assembly {
             EmailViewController(viewModel: resolver.resolve(EmailViewModel.self)!)
         }
 
+        // SignUp - Self
+        container.register(SelfViewModel.self) { _ in
+            SelfViewModel()
+        }
+        container.register(SelfViewController.self) { resolver in
+            SelfViewController(viewModel: resolver.resolve(SelfViewModel.self)!)
+        }
     }
 }
