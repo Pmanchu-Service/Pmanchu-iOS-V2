@@ -26,7 +26,7 @@ public class SkillViewModel: BaseViewModel, Stepper {
             .withLatestFrom(skillText)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.steps.accept(PMStep.selfIsRequired)
+                self.steps.accept(PMStep.majorIsRequired)
             })
             .disposed(by: disposeBag)
         return Output(
