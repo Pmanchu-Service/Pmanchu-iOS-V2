@@ -28,19 +28,12 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
             clickNextButton: nextButton.buttonTap.asObservable(),
             nextButton: nextButton
         )
-        
         let output = viewModel.transform(input: input)
-
-        output.isNextButtonEnabled
+        output.isButtonEnabled
             .drive(nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
-
-        output.nextStep
-            .drive(onNext: { [weak self] step in
-                self?.viewModel.steps.accept(step)
-            })
-            .disposed(by: disposeBag)
     }
+
     public override func addView() {
         [
             label,
@@ -48,7 +41,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
             nextButton
         ].forEach { view.addSubview($0) }
     }
-    
+
     public override func setLayout() {
         label.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(60)

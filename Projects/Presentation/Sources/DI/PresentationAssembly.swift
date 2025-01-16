@@ -46,5 +46,21 @@ public final class PresentationAssembly: Assembly {
         container.register(SelfViewController.self) { resolver in
             SelfViewController(viewModel: resolver.resolve(SelfViewModel.self)!)
         }
+
+        // SignUp - Skill
+        container.register(SkillViewModel.self) { _ in
+            SkillViewModel()
+        }
+        container.register(SkillViewController.self) { resolver in
+            SkillViewController(viewModel: resolver.resolve(SkillViewModel.self)!)
+        }
+
+        // SignUp - major
+        container.register(MajorViewModel.self) { _ in
+            MajorViewModel()
+        }
+        container.register(MajorViewController.self) { resolver in
+            MajorViewController(viewModel: resolver.resolve(MajorViewModel.self)!)
+        }
     }
 }

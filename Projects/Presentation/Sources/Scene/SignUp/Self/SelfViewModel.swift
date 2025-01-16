@@ -15,26 +15,23 @@ public class SelfViewModel: BaseViewModel, Stepper {
         let nextButton: PMButton
     }
     public struct Output {
-        let isNextButtonEnabled: Driver<Bool>
-        let nextStep: Driver<Step>
+        let isButtonEnabled: Driver<Bool>
     }
 
     public func transform(input: Input) -> Output {
         let selfText = input.selfText.share()
-        
-        let isNextButtonEnabled = selfText
+        let isButtonEnabled = selfText
             .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .asDriver(onErrorJustReturn: false)
-        
-        let nextStep = input.clickNextButton
+        input.clickNextButton
             .withLatestFrom(selfText)
-            .map { _ in PMStep.selfIsRequired as Step }
-            .asDriver(onErrorJustReturn: PMStep.selfIsRequired as Step)
-
-        
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.steps.accept(PMStep.skillIsRequired)
+            })
+            .disposed(by: disposeBag)
         return Output(
-            isNextButtonEnabled: isNextButtonEnabled,
-            nextStep: nextStep
+            isButtonEnabled: isButtonEnabled
         )
     }
 }

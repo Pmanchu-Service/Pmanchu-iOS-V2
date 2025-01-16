@@ -36,9 +36,19 @@ public class LoginFlow: Flow {
             return navigateToSelf()
         case .skillIsRequired:
             return navigateToSkill()
+        case .majorIsRequired:
+            return navigateToMajor()
         default:
             return .none
         }
+    }
+    private func navigateToMajor() -> FlowContributors {
+        let majorViewController = container.resolve(MajorViewController.self)!
+        self.rootViewController.pushViewController(majorViewController, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: majorViewController,
+            withNextStepper: majorViewController.viewModel
+        ))
     }
     private func navigateToSkill() -> FlowContributors {
         let skillViewController = container.resolve(SkillViewController.self)!
@@ -48,9 +58,6 @@ public class LoginFlow: Flow {
             withNextStepper: skillViewController.viewModel
         ))
     }
-    
-    
-    
     private func navigateToSelf() -> FlowContributors {
         let selfViewController = container.resolve(SelfViewController.self)!
         self.rootViewController.pushViewController(selfViewController, animated: true)
