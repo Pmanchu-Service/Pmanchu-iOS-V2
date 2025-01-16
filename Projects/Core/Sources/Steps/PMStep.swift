@@ -10,4 +10,5 @@ public enum PMStep: Step {
     case selfIsRequired
     case skillIsRequired
     case majorIsRequired
+    case homeIsReRequired
 }
