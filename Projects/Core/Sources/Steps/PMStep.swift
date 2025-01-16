@@ -9,4 +9,5 @@ public enum PMStep: Step {
     case emailIsRequired
     case selfIsRequired
     case skillIsRequired
+    case majorIsRequired
 }
