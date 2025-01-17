@@ -25,7 +25,7 @@ public class TabsFlow: Flow {
     private lazy var profileFlow = ProfileFlow(container: container)
 
     public func navigate(to step: Step) -> FlowContributors {
-        guard let step = step as? PiCKStep else { return .none }
+        guard let step = step as? PMStep else { return .none }
 
         switch step {
         case .tabIsRequired:
@@ -33,7 +33,7 @@ public class TabsFlow: Flow {
         case .appIsRequired:
             return dismissToOnbording()
         case .popIsRequired:
-            return .end(forwardToParentFlowWithStep: PiCKStep.tabIsRequired)
+            return .end(forwardToParentFlowWithStep: PMStep.tabIsRequired)
         default:
             return .none
         }
@@ -42,46 +42,39 @@ public class TabsFlow: Flow {
     private func setupTabBar() -> FlowContributors {
         Flows.use(
             homeFlow,
-            schoolMealFlow,
-            applyFlow,
-            scheduleFlow,
-            allTabFlow,
+            userSearchFlow,
+            heartFlow,
+            profileFlow,
             when: .created
-        ) { home, schoolMeal, apply, schedule, allTab in
-            home.tabBarItem = PiCkTabBarTypeItem(.home)
-            schoolMeal.tabBarItem = PiCkTabBarTypeItem(.schoolMeal)
-            apply.tabBarItem = PiCkTabBarTypeItem(.apply)
-            schedule.tabBarItem = PiCkTabBarTypeItem(.schedule)
-            allTab.tabBarItem = PiCkTabBarTypeItem(.allTab)
+        ) { home, userSearch, heart, profile in
+            home.tabBarItem = PMTabBarTypeItem(.home)
+            userSearch.tabBarItem = PMTabBarTypeItem(.userSearch)
+            heart.tabBarItem = PMTabBarTypeItem(.heart)
+            profile.tabBarItem = PMTabBarTypeItem(.profile)
 
             self.rootViewController.setViewControllers([
                 home,
-                schoolMeal,
-                apply,
-                schedule,
-                allTab
+                userSearch,
+                heart,
+                profile
             ], animated: false)
         }
         return .multiple(flowContributors: [
             .contribute(
                 withNextPresentable: homeFlow,
-                withNextStepper: OneStepper(withSingleStep: PiCKStep.homeIsRequired)
+                withNextStepper: OneStepper(withSingleStep: PMStep.homeIsRequired)
             ),
             .contribute(
-                withNextPresentable: schoolMealFlow,
-                withNextStepper: OneStepper(withSingleStep: PiCKStep.schoolMealIsRequired)
+                withNextPresentable: userSearchFlow,
+                withNextStepper: OneStepper(withSingleStep: PMStep.userIsRequired)
             ),
             .contribute(
-                withNextPresentable: applyFlow,
-                withNextStepper: OneStepper(withSingleStep: PiCKStep.applyIsRequired)
+                withNextPresentable: heartFlow,
+                withNextStepper: OneStepper(withSingleStep: PMStep.heartIsRequired)
             ),
             .contribute(
-                withNextPresentable: scheduleFlow,
-                withNextStepper: OneStepper(withSingleStep: PiCKStep.scheduleIsRequired)
-            ),
-            .contribute(
-                withNextPresentable: allTabFlow,
-                withNextStepper: OneStepper(withSingleStep: PiCKStep.allTabIsRequired)
+                withNextPresentable: profileFlow,
+                withNextStepper: OneStepper(withSingleStep: PMStep.profileIsRequired)
             )
         ])
     }
@@ -94,7 +87,7 @@ public class TabsFlow: Flow {
                 self.rootViewController.dismiss(animated: false)
             }
 
-        return .end(forwardToParentFlowWithStep: PiCKStep.onboardingIsRequired)
+        return .end(forwardToParentFlowWithStep: PMStep.onboardingIsRequired)
     }
 
 }
