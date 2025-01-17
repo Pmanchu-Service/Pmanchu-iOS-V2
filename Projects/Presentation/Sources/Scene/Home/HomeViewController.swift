@@ -1,8 +1,12 @@
-//
-//  HomeViewController.swift
-//  Presentation
-//
-//  Created by 이지훈 on 1/16/25.
-//  Copyright © 2025 com.team.mandoo. All rights reserved.
-//
+import UIKit
+import SnapKit
+import Then
+import RxSwift
+import RxCocoa
+import Core
+import Domain
+import DesignSystem
 
+public class HomeViewController: BaseViewController<HomeViewModel> {
+    
+}
