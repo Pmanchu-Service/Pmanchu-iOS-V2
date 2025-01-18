@@ -2,12 +2,13 @@ import UIKit
 
 import RxSwift
 import RxCocoa
-
+import RxFlow
 import Core
 import DesignSystem
 
 open class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
     public let disposeBag = DisposeBag()
+    public let steps = PublishRelay<Step>()
     public var viewModel: ViewModel
     public init(viewModel: ViewModel) {
         self.viewModel = viewModel
