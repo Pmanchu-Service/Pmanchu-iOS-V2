@@ -38,9 +38,19 @@ public class LoginFlow: Flow {
             return navigateToSkill()
         case .majorIsRequired:
             return navigateToMajor()
+        case .toMainIsRequired:
+            return navigateToMain()
         default:
             return .none
         }
+    }
+    private func navigateToMain() -> FlowContributors {
+        let mainViewController = container.resolve(HomeViewController.self)!
+        self.rootViewController.pushViewController(mainViewController, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: mainViewController,
+            withNextStepper: mainViewController.viewModel
+        ))
     }
     private func navigateToMajor() -> FlowContributors {
         let majorViewController = container.resolve(MajorViewController.self)!
