@@ -7,4 +7,18 @@ import Domain
 
 public class HeartViewModel: BaseViewModel, Stepper {
     
+    private let disposeBag = DisposeBag()
+    public var steps = PublishRelay<Step>()
+    
+    public init() {}
+    
+    public struct Input {}
+    public struct Output {}
+    
+    public func transform(input: Input) -> Output {
+        return Output()
+    }
+    
 }
+
+
