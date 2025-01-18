@@ -11,6 +11,8 @@ public enum PMStep: Step {
     case skillIsRequired
     case majorIsRequired
     case homeIsReRequired
+    case toMainIsRequired
+    
     
     case onboardingIsRequired
     // MARK: Tab
