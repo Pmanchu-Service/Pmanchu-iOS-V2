@@ -27,7 +27,7 @@ public class HeartFlow: Flow {
     }
 
     private func navigateToHeart() -> FlowContributors {
-        let vc = container.resolve(.self)!
+        let vc = container.resolve(HeartViewController.self)!
 
         self.rootViewController.pushViewController(vc, animated: true)
         return .one(flowContributor: .contribute(
@@ -35,5 +35,4 @@ public class HeartFlow: Flow {
             withNextStepper: vc.viewModel
         ))
     }
-
 }

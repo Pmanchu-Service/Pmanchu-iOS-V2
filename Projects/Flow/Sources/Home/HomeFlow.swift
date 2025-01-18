@@ -27,7 +27,7 @@ public class HomeFlow: Flow {
         }
         
         
-        private func navigateToHome() -> FlowContributors {
+        func navigateToHome() -> FlowContributors {
             let vc = container.resolve(HomeViewController.self)!
             
             self.rootViewController.pushViewController(vc, animated: true)
@@ -36,6 +36,5 @@ public class HomeFlow: Flow {
                 withNextStepper: vc.viewModel
             ))
         }
-        
     }
 }
