@@ -19,6 +19,22 @@ public class MajorViewController: BaseViewController<MajorViewModel> {
         view.backgroundColor = .systemBackground
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
+    
+    public override func bind() {
+        super.bind()
+
+        let input = MajorViewModel.Input(
+            nextButtonTap: nextButton.rx.tap.asObservable()
+        )
+
+        let output = viewModel.transform(input: input)
+        output.nextStep
+            .drive(onNext: { [weak self] step in
+                self?.steps.accept(step)
+            })
+            .disposed(by: disposeBag)
+    }
+
     public override func addView() {
         [
             label,
