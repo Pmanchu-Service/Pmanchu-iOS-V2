@@ -10,7 +10,12 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
     private let label = PMAuthLabelView(
         explainText: "기술스택을 입력하세요"
     )
-    private let skillTextField = PMTextField()
+    private let skillTextField = PMTextField(
+        placeholder: "기술 스택을 입력하세요"
+    )
+    private let addButton = SkillAddButton(
+        buttonText: "+"
+    )
     private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false
@@ -36,6 +41,7 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
         [
             label,
             skillTextField,
+            addButton,
             nextButton
         ].forEach { view.addSubview($0) }
     }
@@ -47,8 +53,15 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
             $0.height.equalTo(73)
         }
         skillTextField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(40)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(label.snp.bottom).offset(60)
+            $0.leading.equalToSuperview().inset(24)
+            $0.trailing.equalToSuperview().inset(71)
+            $0.height.equalTo(40)
+        }
+        addButton.snp.makeConstraints {
+            $0.centerY.equalTo(skillTextField.snp.centerY)
+            $0.leading.equalTo(skillTextField.snp.trailing).offset(7)
+            $0.width.equalTo(40)
             $0.height.equalTo(40)
         }
         nextButton.snp.makeConstraints {
