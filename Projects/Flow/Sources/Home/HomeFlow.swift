@@ -22,6 +22,7 @@ public class HomeFlow: Flow {
         switch step {
         case .homeIsRequired:
             return navigateToHome()
+        //
         default:
             return .none
         }
