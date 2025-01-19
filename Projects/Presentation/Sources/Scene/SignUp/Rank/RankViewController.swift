@@ -10,7 +10,9 @@ public class RankViewController: BaseViewController<RankViewModel> {
     private let label = PMAuthLabelView(
         explainText: "기수를 입력하세요"
     )
-    private let rankTextField = PMTextField()
+    private let rankTextField = PMTextField(
+        placeholder: "본인의 기수를 입력해주세요 (ex 10)"
+    )
     private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false

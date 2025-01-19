@@ -19,7 +19,7 @@ public class MajorViewController: BaseViewController<MajorViewModel> {
         view.backgroundColor = .systemBackground
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
-    
+
     public override func bind() {
         super.bind()
 
