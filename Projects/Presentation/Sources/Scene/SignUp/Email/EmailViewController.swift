@@ -10,7 +10,9 @@ public class EmailViewController: BaseViewController<EmailViewModel> {
     private let label = PMAuthLabelView(
         explainText: "이메일을 입력하세요"
     )
-    private let emailTextField = PMTextField()
+    private let emailTextField = PMTextField(
+        placeholder: "이메일을 입력해주세요"
+    )
     private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false

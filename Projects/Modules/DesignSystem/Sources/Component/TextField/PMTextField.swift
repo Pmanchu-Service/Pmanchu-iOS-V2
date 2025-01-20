@@ -8,6 +8,25 @@ import Core
 public final class PMTextField: BaseTextField {
     private let padding = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 
+    public convenience init(
+        placeholder: String,
+        fontSize: CGFloat = 14
+    ) {
+        self.init(frame: .zero)
+        self.setupTextField(placeholder: placeholder, fontSize: fontSize)
+    }
+
+    private func setupTextField(placeholder: String, fontSize: CGFloat) {
+        self.attribute()
+        self.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [
+                .foregroundColor: UIColor.gray5,
+                .font: UIFont.systemFont(ofSize: fontSize)
+            ]
+        )
+    }
+
     public override func attribute() {
         super.attribute()
         self.do {
@@ -18,13 +37,6 @@ public final class PMTextField: BaseTextField {
             $0.font = UIFont.systemFont(ofSize: 14)
             $0.textColor = .black
             $0.textAlignment = .left
-            $0.attributedPlaceholder = NSAttributedString(
-                string: "이름(본명)을 입력하세요",
-                attributes: [
-                    .foregroundColor: UIColor.gray5,
-                    .font: UIFont.systemFont(ofSize: 14)
-                ]
-            )
         }
     }
 

@@ -10,7 +10,9 @@ public class NameViewController: BaseViewController<NameViewModel> {
     private let label = PMAuthLabelView(
         explainText: "이름을 입력하세요"
     )
-    private let nameTextField = PMTextField()
+    private let nameTextField = PMTextField(
+        placeholder: "이름(본명)을 입력하세요"
+    )
     private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false
@@ -47,7 +49,7 @@ public class NameViewController: BaseViewController<NameViewModel> {
             $0.height.equalTo(73)
         }
         nameTextField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(40)
+            $0.top.equalTo(label.snp.bottom).offset(181)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(40)
         }

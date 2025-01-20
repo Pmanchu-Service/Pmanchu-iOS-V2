@@ -1,4 +1,5 @@
 import UIKit
+import Core
 
 public struct TabItemInfo {
     let title: String
@@ -8,7 +9,7 @@ public struct TabItemInfo {
 
 public enum PMTabBarType: Int {
     case home, userSearch, heart, profile
-    
+
     func tabItemTuple() -> TabItemInfo {
         switch self {
         case .home:
@@ -35,7 +36,21 @@ public enum PMTabBarType: Int {
                 image: .user,
                 tag: 3
             )
-            
         }
+    }
+}
+
+public class PMTabBarTypeItem: UITabBarItem {
+    public init(_ type: PMTabBarType) {
+        super.init()
+        let info = type.tabItemTuple()
+
+        self.title = info.title
+        self.image = info.image
+        self.tag = info.tag
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

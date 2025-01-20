@@ -14,6 +14,27 @@ public final class PresentationAssembly: Assembly {
         container.register(LoginViewController.self) { resolver in
             LoginViewController(viewModel: resolver.resolve(LoginViewModel.self)!)
         }
+        container.register(HomeViewModel.self) { _ in
+            HomeViewModel()
+        }
+        container.register(HomeViewController.self) { resolver in
+            HomeViewController(viewModel: resolver.resolve(HomeViewModel.self)!)
+        }
+
+        // MARK: UserSearch
+        container.register(UserSearchViewController.self) { resolver in
+            UserSearchViewController(viewModel: resolver.resolve(UserSearchViewModel.self)!)
+        }
+
+        // MARK: Profile
+        container.register(ProfileViewController.self) { resolver in
+            ProfileViewController(viewModel: resolver.resolve(ProfileViewModel.self)!)
+        }
+
+        // MARK: Heart
+        container.register(HeartViewController.self) { resolver in
+            HeartViewController(viewModel: resolver.resolve(HeartViewModel.self)!)
+        }
 
         // SignUp - Name
         container.register(NameViewController.self) { resolver in

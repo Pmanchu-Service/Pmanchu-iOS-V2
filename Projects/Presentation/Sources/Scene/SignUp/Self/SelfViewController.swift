@@ -10,7 +10,12 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
     private let label = PMAuthLabelView(
         explainText: "자기소개를 입력하세요"
     )
-    private let selfTextField = PMTextField()
+    private let selfTextField = PMTextField(
+        placeholder: "한 줄로 자기소개를 해주세요"
+    )
+    private let detailTextField = DetailTextView(
+        placeholder: "구체적으로 자기소개를 해주세요"
+    )
     private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false
@@ -38,6 +43,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
         [
             label,
             selfTextField,
+            detailTextField,
             nextButton
         ].forEach { view.addSubview($0) }
     }
@@ -53,6 +59,11 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
             $0.top.equalTo(label.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(40)
+        }
+        detailTextField.snp.makeConstraints {
+            $0.top.equalTo(selfTextField.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(183)
         }
         nextButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)
