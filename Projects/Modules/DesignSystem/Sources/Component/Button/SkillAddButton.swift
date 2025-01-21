@@ -4,7 +4,6 @@ import Then
 import RxSwift
 import RxCocoa
 import Core
-import DesignSystem
 
 public class SkillAddButton: BaseButton {
     public var buttonTap: ControlEvent<Void> {
