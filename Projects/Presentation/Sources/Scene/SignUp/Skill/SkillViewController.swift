@@ -7,7 +7,7 @@ import Core
 import DesignSystem
 
 public class SkillViewController: BaseViewController<SkillViewModel> {
-    private let label = PMAuthLabelView(
+    private let signupLabel = PMAuthLabelView(
         explainText: "기술스택을 입력하세요"
     )
     private let skillTextField = PMTextField(
@@ -39,21 +39,21 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
 
     public override func addView() {
         [
-            label,
+            signupLabel,
             skillTextField,
             addButton,
             nextButton
         ].forEach { view.addSubview($0) }
     }
     public override func setLayout() {
-        label.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(60)
+        signupLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(119)
             $0.leading.equalToSuperview().inset(32)
             $0.width.equalTo(224)
             $0.height.equalTo(73)
         }
         skillTextField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(60)
+            $0.top.equalTo(signupLabel.snp.bottom).offset(60)
             $0.leading.equalToSuperview().inset(24)
             $0.trailing.equalToSuperview().inset(71)
             $0.height.equalTo(40)

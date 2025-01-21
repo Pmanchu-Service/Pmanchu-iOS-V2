@@ -7,7 +7,7 @@ import Core
 import DesignSystem
 
 public class RankViewController: BaseViewController<RankViewModel> {
-    private let label = PMAuthLabelView(
+    private let signupLabel = PMAuthLabelView(
         explainText: "기수를 입력하세요"
     )
     private let rankTextField = PMTextField(
@@ -40,21 +40,21 @@ public class RankViewController: BaseViewController<RankViewModel> {
 
     public override func addView() {
         [
-            label,
+            signupLabel,
             rankTextField,
             nextButton
         ].forEach { view.addSubview($0) }
     }
 
     public override func setLayout() {
-        label.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(60)
+        signupLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(119)
             $0.leading.equalToSuperview().inset(32)
             $0.width.equalTo(224)
             $0.height.equalTo(73)
         }
         rankTextField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(60)
+            $0.top.equalTo(signupLabel.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(40)
         }

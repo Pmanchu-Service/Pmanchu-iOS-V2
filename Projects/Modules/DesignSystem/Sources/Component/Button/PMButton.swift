@@ -18,7 +18,7 @@ public class PMButton: BaseButton {
         }
     }
     private var bgColor: UIColor {
-        isEnabled ? .main4 : .gray3
+        isEnabled ? .main4 : .gray4
     }
 
     override public init(frame: CGRect) {
