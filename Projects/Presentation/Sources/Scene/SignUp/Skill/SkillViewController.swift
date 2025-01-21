@@ -13,9 +13,7 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
     private let skillTextField = PMTextField(
         placeholder: "기술 스택을 입력하세요"
     )
-    private let addButton = SkillAddButton(
-        buttonText: "+"
-    )
+    private let addButton = SkillAddButton()
     private let nextButton = PMButton(
         buttonText: "다음",
         isHidden: false
