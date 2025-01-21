@@ -24,11 +24,7 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
         $0.spacing = 8
         $0.alignment = .fill
     }
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        setupKeyboard()
-    }
-    private func setupKeyboard() {
+    public override func setupKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
