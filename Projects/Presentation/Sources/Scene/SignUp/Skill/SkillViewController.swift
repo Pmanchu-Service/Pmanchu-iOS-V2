@@ -54,7 +54,7 @@ public class SkillViewController: BaseViewController<SkillViewModel> {
             $0.top.equalTo(signupLabel.snp.bottom).offset(60)
             $0.leading.equalToSuperview().inset(24)
             $0.trailing.equalToSuperview().inset(71)
-            $0.height.equalTo(40)
+            $0.height.equalTo(45)
         }
         addButton.snp.makeConstraints {
             $0.centerY.equalTo(skillTextField.snp.centerY)

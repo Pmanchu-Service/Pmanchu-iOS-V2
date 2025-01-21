@@ -51,7 +51,7 @@ public class NameViewController: BaseViewController<NameViewModel> {
         nameTextField.snp.makeConstraints {
             $0.top.equalTo(signuplabel.snp.bottom).offset(181)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(40)
+            $0.height.equalTo(45)
         }
         nextButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)

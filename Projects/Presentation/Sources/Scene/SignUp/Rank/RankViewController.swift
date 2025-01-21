@@ -56,7 +56,7 @@ public class RankViewController: BaseViewController<RankViewModel> {
         rankTextField.snp.makeConstraints {
             $0.top.equalTo(signupLabel.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(40)
+            $0.height.equalTo(45)
         }
         nextButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)

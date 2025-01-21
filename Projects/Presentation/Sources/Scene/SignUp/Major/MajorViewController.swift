@@ -43,7 +43,7 @@ public class MajorViewController: BaseViewController<MajorViewModel> {
     }
     public override func setLayout() {
         label.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(60)
+            $0.top.equalToSuperview().inset(119)
             $0.leading.equalToSuperview().inset(32)
             $0.width.equalTo(224)
             $0.height.equalTo(73)
