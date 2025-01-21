@@ -7,7 +7,7 @@ import Core
 import DesignSystem
 
 public class NameViewController: BaseViewController<NameViewModel> {
-    private let label = PMAuthLabelView(
+    private let signuplabel = PMAuthLabelView(
         explainText: "이름을 입력하세요"
     )
     private let nameTextField = PMTextField(
@@ -35,23 +35,23 @@ public class NameViewController: BaseViewController<NameViewModel> {
 
     public override func addView() {
         [
-            label,
+            signuplabel,
             nameTextField,
             nextButton
         ].forEach { view.addSubview($0) }
     }
 
     public override func setLayout() {
-        label.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(60)
+        signuplabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(119)
             $0.leading.equalToSuperview().inset(32)
             $0.width.equalTo(224)
             $0.height.equalTo(73)
         }
         nameTextField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(181)
+            $0.top.equalTo(signuplabel.snp.bottom).offset(181)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(40)
+            $0.height.equalTo(45)
         }
         nextButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(24)

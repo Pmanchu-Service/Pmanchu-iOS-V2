@@ -17,10 +17,10 @@ public class MajorViewModel: BaseViewModel, Stepper {
     }
     public func transform(input: Input) -> Output {
         let nextStep = input.nextButtonTap
-            .map { PMStep.toMainIsRequired }
-            .asDriver(onErrorJustReturn: PMStep.toMainIsRequired)
+            .map { PMStep.tabIsRequired }
+            .asDriver(onErrorJustReturn: PMStep.tabIsRequired)
         input.nextButtonTap
-            .map { PMStep.toMainIsRequired }
+            .map { PMStep.tabIsRequired }
             .bind(to: steps)
             .disposed(by: disposeBag)
         return Output(
