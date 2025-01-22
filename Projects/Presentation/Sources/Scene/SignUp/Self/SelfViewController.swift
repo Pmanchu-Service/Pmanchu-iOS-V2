@@ -58,7 +58,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
             $0.height.equalTo(73)
         }
         selfTextField.snp.makeConstraints {
-            $0.top.equalTo(signupLabel.snp.bottom).offset(40)
+            $0.top.equalTo(signupLabel.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(45)
         }
