@@ -46,7 +46,7 @@ public class EmailViewController: BaseViewController<EmailViewModel> {
             $0.height.equalTo(73)
         }
         emailTextField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(40)
+            $0.top.equalTo(label.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(45)
         }

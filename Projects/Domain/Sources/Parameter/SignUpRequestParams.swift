@@ -2,6 +2,7 @@ import Foundation
 
 public struct SignUpRequestParams: Encodable {
     public let name: String
+    public let profileImage: Data
     public let majors: [String]
     public let rank: Int
     public let introduction: String
@@ -12,6 +13,7 @@ public struct SignUpRequestParams: Encodable {
 
     public init(
         name: String,
+        profileImage: Data,
         majors: [String],
         rank: Int,
         introduction: String,
@@ -21,6 +23,7 @@ public struct SignUpRequestParams: Encodable {
         stacks: [String]
     ) {
         self.name = name
+        self.profileImage = profileImage
         self.majors = majors
         self.rank = rank
         self.introduction = introduction
@@ -32,6 +35,7 @@ public struct SignUpRequestParams: Encodable {
 
     enum CodingKeys: String, CodingKey {
         case name
+        case profileImage
         case majors
         case rank
         case introduction

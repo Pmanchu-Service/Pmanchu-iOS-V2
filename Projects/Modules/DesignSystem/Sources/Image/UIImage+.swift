@@ -15,6 +15,7 @@ public extension UIImage {
     static let setting = DesignSystemAsset.Images.setting.image
     static let cancel = DesignSystemAsset.Images.cancel.image
     static let plus = DesignSystemAsset.Images.plus.image
+    static let profile = DesignSystemAsset.Images.profile.image
     static let link = DesignSystemAsset.Images.link.image
     static let edit = DesignSystemAsset.Images.edit.image
     static let filter = DesignSystemAsset.Images.filter.image
