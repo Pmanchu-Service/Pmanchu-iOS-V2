@@ -25,6 +25,10 @@ open class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
         configureNavigationBar()
         self.navigationItem.hidesBackButton = true
     }
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bindAction()
+    }
 
     open func attribute() {
         
