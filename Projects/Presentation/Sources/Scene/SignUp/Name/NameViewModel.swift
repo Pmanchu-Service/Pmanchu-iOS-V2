@@ -13,7 +13,7 @@ public class NameViewModel: BaseViewModel, Stepper {
     private let keychain = KeychainImpl()
     private let signUpUseCase: SignUpUseCase
     private let nameErrorDescription = PublishRelay<String?>()
-    
+
     public init(signUpUseCase: SignUpUseCase) {
         self.signUpUseCase = signUpUseCase
     }
@@ -25,7 +25,7 @@ public class NameViewModel: BaseViewModel, Stepper {
     public struct Output {
         let nameErrorDescription: Signal<String?>
     }
-    
+
     public func transform(input: Input) -> Output {
         let nameText = input.nameText.share()
         
@@ -45,7 +45,6 @@ public class NameViewModel: BaseViewModel, Stepper {
             .subscribe(onNext: { [weak self] name in
                 guard let self = self else { return }
                 self.steps.accept(PMStep.rankIsRequired)
-                
                 let signUpRequest = SignUpRequestParams(
                     name: name.trimmingCharacters(in: .whitespacesAndNewlines),
                     profileImage: Data(),

@@ -18,6 +18,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
     )
     private let nextButton = PMButton(
         buttonText: "다음",
+        isEnabled: false,
         isHidden: false
     )
 
@@ -30,6 +31,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
     public override func bind() {
         let input = SelfViewModel.Input(
             selfText: selfTextField.rx.text.orEmpty.asObservable(),
+            detailText: detailTextField.rx.text.orEmpty.asObservable(),
             clickNextButton: nextButton.buttonTap.asObservable(),
             nextButton: nextButton
         )
