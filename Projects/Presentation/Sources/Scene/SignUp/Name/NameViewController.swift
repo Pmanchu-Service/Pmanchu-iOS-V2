@@ -10,6 +10,13 @@ public class NameViewController: BaseViewController<NameViewModel> {
     private let signuplabel = PMAuthLabelView(
         explainText: "이름을 입력하세요"
     )
+    private let profileImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.image = .profile
+    }
+    private let cameraButton = UIButton().then {
+        $0.setImage(.camera, for: .normal)
+    }
     private let nameTextField = PMTextField(
         placeholder: "이름(본명)을 입력하세요"
     )
@@ -36,9 +43,11 @@ public class NameViewController: BaseViewController<NameViewModel> {
     public override func addView() {
         [
             signuplabel,
+            profileImageView,
             nameTextField,
             nextButton
         ].forEach { view.addSubview($0) }
+        profileImageView.addSubview(cameraButton)
     }
 
     public override func setLayout() {
@@ -48,8 +57,15 @@ public class NameViewController: BaseViewController<NameViewModel> {
             $0.width.equalTo(224)
             $0.height.equalTo(73)
         }
+        profileImageView.snp.makeConstraints {
+            $0.top.equalTo(signuplabel.snp.bottom).offset(60)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        cameraButton.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
         nameTextField.snp.makeConstraints {
-            $0.top.equalTo(signuplabel.snp.bottom).offset(181)
+            $0.top.equalTo(profileImageView.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(45)
         }
