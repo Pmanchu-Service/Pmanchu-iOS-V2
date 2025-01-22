@@ -49,15 +49,15 @@ class SkillItemView: UIView {
             $0.size.equalTo(20)
         }
     }
-    
+
     private func setupAction() {
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
-    
+
     @objc private func deleteButtonTapped() {
         onDelete?()
     }
-    
+
     func configure(with text: String) {
         skillLabel.text = text
     }

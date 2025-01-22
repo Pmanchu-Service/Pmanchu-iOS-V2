@@ -37,6 +37,11 @@ let dependencies = Dependencies.init(
                 url: "https://github.com/Swinject/Swinject.git",
                 requirement: .upToNextMajor(from: "2.8.0")
             ),
+            // RxGesture
+            .remote(
+                url: "https://github.com/RxSwiftCommunity/RxGesture.git",
+                requirement: .upToNextMajor(from: "4.0.4")
+                ),
         ],
         baseSettings: .settings()
     ),
