@@ -1,8 +1,13 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class SkillItemView: UIView {
+    private let disposeBag = DisposeBag()
+    let deleteButtonTapped = PublishRelay<Void>()
     private let containerView = UIView().then {
         $0.backgroundColor = .systemBackground
         $0.layer.cornerRadius = 8
@@ -19,19 +24,22 @@ class SkillItemView: UIView {
         $0.setImage(UIImage(systemName: "xmark"), for: .normal)
         $0.tintColor = .systemGray
     }
-    var onDelete: (() -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-        setupAction()
+        bind()
     }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     private func setupLayout() {
         addSubview(containerView)
         containerView.addSubview(skillLabel)
         containerView.addSubview(deleteButton)
+
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.height.equalTo(45)
@@ -50,12 +58,10 @@ class SkillItemView: UIView {
         }
     }
 
-    private func setupAction() {
-        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-    }
-
-    @objc private func deleteButtonTapped() {
-        onDelete?()
+    private func bind() {
+        deleteButton.rx.tap
+            .bind(to: deleteButtonTapped)
+            .disposed(by: disposeBag)
     }
 
     func configure(with text: String) {

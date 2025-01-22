@@ -10,7 +10,13 @@ public class SkillViewModel: BaseViewModel, Stepper {
     private let disposeBag = DisposeBag()
     public var steps = PublishRelay<Step>()
     public let deleteSkillSubject = PublishRelay<String>()
-    private var skillList: [String] = []
+    private let skillListRelay = BehaviorRelay<[String]>(value: [])
+    private var skillList: [String] = [] {
+        didSet {
+            skillListRelay.accept(skillList)
+        }
+    }
+
     public struct Input {
         let skillText: Observable<String>
         let clickNextButton: Observable<Void>
@@ -18,7 +24,7 @@ public class SkillViewModel: BaseViewModel, Stepper {
         let deleteSkill: Observable<String>
         let nextButton: PMButton
     }
-    
+
     public struct Output {
         let isButtonEnabled: Driver<Bool>
         let skills: Driver<[String]>
@@ -26,10 +32,6 @@ public class SkillViewModel: BaseViewModel, Stepper {
 
     public func transform(input: Input) -> Output {
         let skillText = input.skillText.share()
-
-        let isButtonEnabled = skillText
-            .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-            .asDriver(onErrorJustReturn: false)
 
         input.addButtonTap
             .withLatestFrom(skillText)
@@ -50,17 +52,14 @@ public class SkillViewModel: BaseViewModel, Stepper {
             })
             .disposed(by: disposeBag)
 
-        let skills = Observable.merge(
-            input.addButtonTap.withLatestFrom(skillText),
-            input.deleteSkill.map { _ in "" }
-        )
-        .map { [weak self] _ in
-            return self?.skillList ?? []
-        }
-        .asDriver(onErrorJustReturn: [])
+        let isButtonEnabled = skillListRelay
+            .map { $0.count >= 1 }
+            .asDriver(onErrorJustReturn: false)
+
+        let skills = skillListRelay
+            .asDriver(onErrorJustReturn: [])
 
         input.clickNextButton
-            .withLatestFrom(skillText)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.steps.accept(PMStep.majorIsRequired)
