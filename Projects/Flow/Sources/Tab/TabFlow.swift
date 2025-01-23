@@ -9,7 +9,7 @@ import Presentation
 
 public class TabsFlow: Flow {
     public let container: Container
-    private let rootViewController =  BaseTabBarController()
+    private let rootViewController = BaseTabBarController()
     public var root: Presentable {
         return self.rootViewController
     }
@@ -58,6 +58,7 @@ public class TabsFlow: Flow {
                 profile
             ], animated: false)
         }
+
         return .multiple(flowContributors: [
             .contribute(
                 withNextPresentable: homeFlow,
@@ -88,5 +89,4 @@ public class TabsFlow: Flow {
 
         return .end(forwardToParentFlowWithStep: PMStep.onboardingIsRequired)
     }
-
 }

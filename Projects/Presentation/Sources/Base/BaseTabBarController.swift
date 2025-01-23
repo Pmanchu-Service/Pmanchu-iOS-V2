@@ -10,15 +10,15 @@ public class BaseTabBarController: UITabBarController {
         setupTabBar()
     }
     private func setupTabBar() {
-        self.tabBar.tintColor = .gray5
+        self.tabBar.tintColor = .system3
         self.tabBar.isTranslucent = false
         self.tabBar.backgroundColor = .main2
         self.delegate = self
 
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.shadowColor = .systemPink
-        appearance.backgroundColor = .green
+        appearance.shadowColor = .gray8
+        appearance.backgroundColor = .gray1
         self.tabBar.scrollEdgeAppearance = appearance
     }
 
