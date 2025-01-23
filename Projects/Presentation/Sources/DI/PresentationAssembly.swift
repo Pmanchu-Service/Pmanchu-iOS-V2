@@ -35,6 +35,15 @@ public final class PresentationAssembly: Assembly {
         container.register(HeartViewController.self) { resolver in
             HeartViewController(viewModel: resolver.resolve(HeartViewModel.self)!)
         }
+        container.register(UserSearchViewModel.self) { _ in
+            UserSearchViewModel()
+        }
+        container.register(ProfileViewModel.self) { _ in
+            ProfileViewModel()
+        }
+        container.register(HeartViewModel.self) { _ in
+            HeartViewModel()
+        }
 
         // SignUp - Name
         container.register(NameViewController.self) { resolver in
