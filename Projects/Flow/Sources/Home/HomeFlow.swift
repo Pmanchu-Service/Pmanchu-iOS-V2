@@ -18,24 +18,22 @@ public class HomeFlow: Flow {
     }
     public func navigate(to step: RxFlow.Step) -> RxFlow.FlowContributors {
         guard let step = step as? PMStep else { return .none }
-        
+
         switch step {
         case .homeIsRequired:
             return navigateToHome()
-        //
         default:
             return .none
         }
-        
-        
-        func navigateToHome() -> FlowContributors {
-            let vc = container.resolve(HomeViewController.self)!
-            
-            self.rootViewController.pushViewController(vc, animated: true)
-            return .one(flowContributor: .contribute(
-                withNextPresentable: vc,
-                withNextStepper: vc.viewModel
-            ))
-        }
+    }
+
+    private func navigateToHome() -> FlowContributors {
+        let vc = container.resolve(HomeViewController.self)!
+
+        self.rootViewController.pushViewController(vc, animated: true)
+        return .one(flowContributor: .contribute(
+            withNextPresentable: vc,
+            withNextStepper: vc.viewModel
+        ))
     }
 }

@@ -1,12 +1,10 @@
 import UIKit
-
 import RxFlow
 import Swinject
-
 import Core
 import Presentation
 
-public class LoginFlow: Flow {
+public class AuthFlow: Flow {
     public let container: Container
     private var rootViewController = UINavigationController()
 
@@ -38,20 +36,17 @@ public class LoginFlow: Flow {
             return navigateToSkill()
         case .majorIsRequired:
             return navigateToMajor()
-        case .toMainIsRequired:
-            return navigateToMain()
+        case .toMainIsRequired, .tabIsRequired:
+            return navigateToTabView()
         default:
             return .none
         }
     }
-    private func navigateToMain() -> FlowContributors {
-        let mainViewController = container.resolve(HomeViewController.self)!
-        self.rootViewController.pushViewController(mainViewController, animated: true)
-        return .one(flowContributor: .contribute(
-            withNextPresentable: mainViewController,
-            withNextStepper: mainViewController.viewModel
-        ))
+
+    private func navigateToTabView() -> FlowContributors {
+        return .end(forwardToParentFlowWithStep: PMStep.tabIsRequired)
     }
+
     private func navigateToMajor() -> FlowContributors {
         let majorViewController = container.resolve(MajorViewController.self)!
         self.rootViewController.pushViewController(majorViewController, animated: true)
@@ -60,6 +55,7 @@ public class LoginFlow: Flow {
             withNextStepper: majorViewController.viewModel
         ))
     }
+
     private func navigateToSkill() -> FlowContributors {
         let skillViewController = container.resolve(SkillViewController.self)!
         self.rootViewController.pushViewController(skillViewController, animated: true)
@@ -68,6 +64,7 @@ public class LoginFlow: Flow {
             withNextStepper: skillViewController.viewModel
         ))
     }
+
     private func navigateToSelf() -> FlowContributors {
         let selfViewController = container.resolve(SelfViewController.self)!
         self.rootViewController.pushViewController(selfViewController, animated: true)
@@ -76,6 +73,7 @@ public class LoginFlow: Flow {
             withNextStepper: selfViewController.viewModel
         ))
     }
+
     private func navigateToEmail() -> FlowContributors {
         let emailViewController = container.resolve(EmailViewController.self)!
         self.rootViewController.pushViewController(emailViewController, animated: true)
@@ -84,6 +82,7 @@ public class LoginFlow: Flow {
             withNextStepper: emailViewController.viewModel
         ))
     }
+
     private func navigateToRank() -> FlowContributors {
         let rankVC = container.resolve(RankViewController.self)!
         self.rootViewController.pushViewController(rankVC, animated: true)
