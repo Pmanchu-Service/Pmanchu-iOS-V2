@@ -18,6 +18,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
     )
     private let nextButton = PMButton(
         buttonText: "다음",
+        isEnabled: false,
         isHidden: false
     )
 
@@ -30,6 +31,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
     public override func bind() {
         let input = SelfViewModel.Input(
             selfText: selfTextField.rx.text.orEmpty.asObservable(),
+            detailText: detailTextField.rx.text.orEmpty.asObservable(),
             clickNextButton: nextButton.buttonTap.asObservable(),
             nextButton: nextButton
         )
@@ -56,7 +58,7 @@ public class SelfViewController: BaseViewController<SelfViewModel> {
             $0.height.equalTo(73)
         }
         selfTextField.snp.makeConstraints {
-            $0.top.equalTo(signupLabel.snp.bottom).offset(40)
+            $0.top.equalTo(signupLabel.snp.bottom).offset(60)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(45)
         }

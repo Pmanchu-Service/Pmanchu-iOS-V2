@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 import RxFlow
@@ -12,6 +13,7 @@ public class NameViewModel: BaseViewModel, Stepper {
     private let keychain = KeychainImpl()
     private let signUpUseCase: SignUpUseCase
     private let nameErrorDescription = PublishRelay<String?>()
+
     public init(signUpUseCase: SignUpUseCase) {
         self.signUpUseCase = signUpUseCase
     }
@@ -23,9 +25,10 @@ public class NameViewModel: BaseViewModel, Stepper {
     public struct Output {
         let nameErrorDescription: Signal<String?>
     }
+
     public func transform(input: Input) -> Output {
         let nameText = input.nameText.share()
-
+        
         nameText
             .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .subscribe(onNext: { isEnabled in
@@ -42,9 +45,9 @@ public class NameViewModel: BaseViewModel, Stepper {
             .subscribe(onNext: { [weak self] name in
                 guard let self = self else { return }
                 self.steps.accept(PMStep.rankIsRequired)
-
                 let signUpRequest = SignUpRequestParams(
                     name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+                    profileImage: Data(),
                     majors: [""],
                     rank: 0,
                     introduction: "",
@@ -63,6 +66,7 @@ public class NameViewModel: BaseViewModel, Stepper {
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
+        
         return Output(
             nameErrorDescription: nameErrorDescription.asSignal()
         )

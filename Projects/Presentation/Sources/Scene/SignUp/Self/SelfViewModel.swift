@@ -9,8 +9,10 @@ import DesignSystem
 public class SelfViewModel: BaseViewModel, Stepper {
     private let disposeBag = DisposeBag()
     public var steps = PublishRelay<Step>()
+
     public struct Input {
         let selfText: Observable<String>
+        let detailText: Observable<String>
         let clickNextButton: Observable<Void>
         let nextButton: PMButton
     }
@@ -20,8 +22,12 @@ public class SelfViewModel: BaseViewModel, Stepper {
 
     public func transform(input: Input) -> Output {
         let selfText = input.selfText.share()
-        let isButtonEnabled = selfText
-            .map { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+        let detailText = input.detailText.share()
+
+        let isButtonEnabled = Observable
+            .combineLatest(selfText, detailText)
+            .map { !$0.0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !$0.1.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
             .asDriver(onErrorJustReturn: false)
         input.clickNextButton
             .withLatestFrom(selfText)
