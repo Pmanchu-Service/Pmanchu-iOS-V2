@@ -8,5 +8,18 @@ import Domain
 import DesignSystem
 
 public class UserSearchViewController: BaseViewController<UserSearchViewModel> {
-    
+    private lazy var navigationBar = PMMainNavigationBar(view: self)
+    public override func addView() {
+        [
+            navigationBar
+        ].forEach { view.addSubview($0) }
+    }
+
+    public override func setLayout() {
+        navigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+
 }

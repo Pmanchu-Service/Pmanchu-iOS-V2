@@ -14,8 +14,7 @@ public class HomeViewController: BaseViewController<HomeViewModel> {
             navigationBar
         ].forEach { view.addSubview($0) }
     }
-    
-    
+
     public override func setLayout() {
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
