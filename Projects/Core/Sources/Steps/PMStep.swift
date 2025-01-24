@@ -30,4 +30,7 @@ public enum PMStep: Step {
 
     // Profile
     case profileIsRequired
+
+    // Notice
+    case notice
 }
