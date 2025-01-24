@@ -22,14 +22,24 @@ public class PMMainNavigationBar: BaseView {
         $0.alignment = .center
     }
 
+    public let bellButtonTapped = PublishRelay<Void>()
+
     public init(view: UIViewController) {
-           self.presentViewController = view
-           super.init(frame: .zero)
-       }
+        self.presentViewController = view
+        super.init(frame: .zero)
+        setupBindings()
+    }
 
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupBindings() {
+        bellButton.rx.tap
+            .do(onNext: { print("Bell button tapped") })
+            .bind(to: bellButtonTapped)
+            .disposed(by: disposeBag)
+    }
 
     public override func layout() {
         [pmLogoImageView, rightItemStackView].forEach { self.addSubview($0) }
