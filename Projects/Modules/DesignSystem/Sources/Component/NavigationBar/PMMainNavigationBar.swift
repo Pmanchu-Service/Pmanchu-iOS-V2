@@ -7,6 +7,7 @@ import Core
 
 public class PMMainNavigationBar: BaseView {
     private let presentViewController: UIViewController
+    public let bellButtonTapped = PublishRelay<Void>()
     private let pmLogoImageView = UIImageView(image: .logo).then {
         $0.contentMode = .scaleAspectFit
     }
@@ -22,8 +23,6 @@ public class PMMainNavigationBar: BaseView {
         $0.alignment = .center
     }
 
-    public let bellButtonTapped = PublishRelay<Void>()
-
     public init(view: UIViewController) {
         self.presentViewController = view
         super.init(frame: .zero)
@@ -36,7 +35,6 @@ public class PMMainNavigationBar: BaseView {
 
     private func setupBindings() {
         bellButton.rx.tap
-            .do(onNext: { print("Bell button tapped") })
             .bind(to: bellButtonTapped)
             .disposed(by: disposeBag)
     }

@@ -22,7 +22,6 @@ public class HomeViewModel: Stepper, BaseViewModel {
     public struct Output {}
 
     public func transform(input: Input) -> Output {
-        // Bind bellTap input to the bellButtonTapped relay
         input.bellTap
             .bind(to: bellButtonTapped)
             .disposed(by: disposeBag)
