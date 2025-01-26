@@ -7,6 +7,7 @@ import Core
 
 public class PMMainNavigationBar: BaseView {
     private let presentViewController: UIViewController
+    public let bellButtonTapped = PublishRelay<Void>()
     private let pmLogoImageView = UIImageView(image: .logo).then {
         $0.contentMode = .scaleAspectFit
     }
@@ -23,13 +24,20 @@ public class PMMainNavigationBar: BaseView {
     }
 
     public init(view: UIViewController) {
-           self.presentViewController = view
-           super.init(frame: .zero)
-       }
+        self.presentViewController = view
+        super.init(frame: .zero)
+        setupBindings()
+    }
 
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupBindings() {
+        bellButton.rx.tap
+            .bind(to: bellButtonTapped)
+            .disposed(by: disposeBag)
+    }
 
     public override func layout() {
         [pmLogoImageView, rightItemStackView].forEach { self.addSubview($0) }

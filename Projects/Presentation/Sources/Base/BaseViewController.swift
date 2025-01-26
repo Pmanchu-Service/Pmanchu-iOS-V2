@@ -31,12 +31,9 @@ open class BaseViewController<ViewModel: BaseViewModel>: UIViewController {
     }
 
     open func attribute() {
-        
         view.backgroundColor = .systemBackground
-
     }
     open func setupKeyboard() {
-        
     }
     open func configureNavigationBar() {
         // 네비게이션바 관련 코드를 설정하는 함수

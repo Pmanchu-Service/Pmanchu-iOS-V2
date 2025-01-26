@@ -45,6 +45,14 @@ public final class PresentationAssembly: Assembly {
             HeartViewModel()
         }
 
+        // MARK: Notice
+        container.register(NoticeViewModel.self) { _ in
+            NoticeViewModel()
+        }
+        container.register(NoticeViewController.self) { resolver in
+            NoticeViewController(viewModel: resolver.resolve(NoticeViewModel.self)!)
+        }
+
         // SignUp - Name
         container.register(NameViewController.self) { resolver in
             NameViewController(viewModel: resolver.resolve(NameViewModel.self)!)
