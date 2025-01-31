@@ -1,11 +1,8 @@
 import UIKit
-
 import SnapKit
 import Then
-
 import RxSwift
 import RxCocoa
-
 import Core
 import DesignSystem
 
@@ -21,38 +18,20 @@ public class LoginViewController: BaseViewController<LoginViewModel> {
         textColor: .system3,
         font: .pmFont(.regular, size: 20)
     )
-    private let githubButton = UIButton().then {
-        var config = UIButton.Configuration.filled()
-
-        config.baseBackgroundColor = .system3
-        config.cornerStyle = .medium
-
-        config.title = "github로 로그인하기"
-        config.baseForegroundColor = .system2
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = .pmFont(.semiBold, size: 20)
-            return outgoing
-        }
-
-        config.image = .github
-        config.imagePlacement = .leading
-        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6)
-        config.imagePadding = 12
-
-        $0.configuration = config
-    }
+    private let githubButton = GitHubLoginButton()
 
     public override func attribute() {
         super.attribute()
         self.highlightText()
     }
+
     public override func bind() {
         let input = LoginViewModel.Input(
             clickGithuhButton: githubButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
     }
+
     public override func addView() {
         [
             logo,
@@ -61,6 +40,7 @@ public class LoginViewController: BaseViewController<LoginViewModel> {
             githubButton
         ].forEach { view.addSubview($0) }
     }
+
     public override func setLayout() {
         logo.snp.makeConstraints {
             $0.top.equalToSuperview().inset(119)
@@ -83,6 +63,7 @@ public class LoginViewController: BaseViewController<LoginViewModel> {
         }
     }
 }
+
 extension LoginViewController {
     private func highlightText() {
         guard let text = self.explainLabel.text else { return }
