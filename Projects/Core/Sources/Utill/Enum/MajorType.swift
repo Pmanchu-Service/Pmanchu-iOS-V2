@@ -1,4 +1,6 @@
-public enum MajorOption: String, CaseIterable {
+import Foundation
+
+public enum MajorType: String {
     case frontEnd = "Front-end"
     case backEnd = "Back-end"
     case devOps = "DevOps"
