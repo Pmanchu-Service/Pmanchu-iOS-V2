@@ -27,7 +27,7 @@ public class LoginViewController: BaseViewController<LoginViewModel> {
 
     public override func bind() {
         let input = LoginViewModel.Input(
-            clickGithuhButton: githubButton.rx.tap.asObservable()
+            clickGitHubButton: githubButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
     }
