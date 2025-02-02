@@ -17,6 +17,7 @@ let project = Project.makeModule(
         .SPM.Swinject,
         .SPM.Then,
         .SPM.SnapKit,
-        .SPM.RxGesture
+        .SPM.RxGesture,
+        .SPM.Realm
     ]
 )

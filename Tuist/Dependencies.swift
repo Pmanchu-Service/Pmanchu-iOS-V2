@@ -42,6 +42,11 @@ let dependencies = Dependencies.init(
                 url: "https://github.com/RxSwiftCommunity/RxGesture.git",
                 requirement: .upToNextMajor(from: "4.0.4")
                 ),
+            // Realm
+            .remote(
+                url: "https://github.com/realm/realm-swift.git",
+                requirement: .upToNextMajor(from: "20.0.1")
+                ),
         ],
         baseSettings: .settings()
     ),
